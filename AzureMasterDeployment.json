@@ -3,109 +3,53 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "customerName": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a unique name for your offer"
-            },
-            "defaultValue": "<enter the MSSP offer name>"
+            "type": "string"
         },
         "location": {
             "type": "string"
         },
         "ProviderName": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "ProviderTenatID": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "deployDelegations": {
             "type": "bool",
             "defaultValue": false
         },
         "LHBasicGroupID": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "LHReaderGroupID": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "LHResponderGroupID": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "LHContributorGroupID": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "LHAdminGroupID": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "VMAdminUserName": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "VMAdminPassword": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Specify a VM Password"
-            },
-            "defaultValue": "foo"
+            "type": "securestring"
         },
         "CSVMAdminUserName": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify a VM Username"
-            },
-            "defaultValue": "vm-adm"
+            "type": "string"
         },
         "CSVMAdminPassword": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Specify a VM Password"
-            },
-            "defaultValue": "foo"
+            "type": "securestring"
         },
         "CSAPIID": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify the CS API ID"
-            },
-            "defaultValue": ""
+            "type": "string"
         },
         "CSAPIKEY": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Specify the CS API Key"
-            },
-            "defaultValue": ""
+            "type": "securestring"
         }
     },
     "variables": {
