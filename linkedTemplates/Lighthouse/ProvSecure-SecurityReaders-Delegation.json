@@ -1,0 +1,95 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "customerName": {
+            "type": "string"
+        },
+        "mspOfferName": {
+            "type": "string"
+        },
+        "mspOfferDescription": {
+            "type": "string"
+        },
+        "managedByTenantId": {
+            "type": "string"
+        },
+        "LHBasicGroupID": {
+            "type": "string"
+        },
+        "LHReaderGroupID": {
+            "type": "string"
+        },
+        "LHResponderGroupID": {
+            "type": "string"
+        },
+        "LHContributorGroupID": {
+            "type": "string"
+        },
+        "LHAdminGroupID": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "authorizations": [
+            { 
+                "principalId": "[parameters('LHBasicGroupID')]", 
+                "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+                "principalIdDisplayName": "Lighthouse Basic Access" 
+            }, 
+            { 
+                "principalId": "[parameters('LHAdminGroupID')]", 
+                "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46",
+                "principalIdDisplayName": "Lighthouse Basic Access" 
+            },
+            {	
+                "principalId": "[parameters('LHReaderGroupID')]",		
+                "roleDefinitionId": "39bc4728-0917-49c7-9d2c-d95423bc2eb4",
+                "principalIdDisplayName": "Lighthouse Basic Access"
+            }
+        ],
+        "eligibleAuthorizations": [
+            {
+                "justInTimeAccessPolicy": { 
+                    "multiFactorAuthProvider": "Azure", 
+                    "maximumActivationDuration": "PT8H" 
+                },	
+                "principalId": "[parameters('LHContributorGroupID')]",	
+                "principalIdDisplayName": "MSSP Security Admins",	
+                "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
+            }
+        ],
+        "mspRegName": "[concat(parameters('customerName'), '-registrationDefinitions')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "apiVersion": "2020-02-01-preview",
+            "name": "[variables('mspRegName')]",
+            "properties": {
+                "registrationDefinitionName": "[parameters('mspOfferName')]",
+                "description": "[parameters('mspOfferDescription')]",
+                "managedByTenantId": "[parameters('managedByTenantId')]",
+                "authorizations": "[variables('authorizations')]",
+                "eligibleAuthorizations": "[variables('eligibleAuthorizations')]"
+            }
+        },
+        {
+            "type": "Microsoft.ManagedServices/registrationAssignments",
+            "apiVersion": "2020-02-01-preview",
+            "name": "[guid(parameters('mspOfferName'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegName'))]"
+            ],
+            "properties": {
+                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegName'))]"
+            }
+        }
+    ],
+    "outputs": {
+        "mspOfferName": {
+            "type": "string",
+            "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
+        }
+    }
+}
